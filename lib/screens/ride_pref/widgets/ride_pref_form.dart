@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:new_flutter/screens/global_widget/bla_button.dart';
+import 'package:new_flutter/screens/location/location_picker_screen.dart';
 import 'package:new_flutter/theme/theme.dart';
- 
+
 import '../../../model/ride/locations.dart';
 import '../../../model/ride_pref/ride_pref.dart';
- 
+
 ///
 /// A Ride Preference From is a view to select:
 ///   - A depcarture location
@@ -31,8 +32,6 @@ class _RidePrefFormState extends State<RidePrefForm> {
   Location? arrival = Location(name: "Lyon", country: Country.france);
   int requestedSeats = 1;
 
-
-
   // ----------------------------------
   // Initialize the Form attributes
   // ----------------------------------
@@ -45,32 +44,51 @@ class _RidePrefFormState extends State<RidePrefForm> {
       arrival = widget.initRidePref!.arrival;
       departureDate = widget.initRidePref!.departureDate;
       requestedSeats = widget.initRidePref!.requestedSeats;
-    } 
+    }
   }
 
   // ----------------------------------
   // Handle events
   // ----------------------------------
- 
 
   // ----------------------------------
   // Compute the widgets rendering
   // ----------------------------------
-  
 
   // ----------------------------------
   // Build the widgets
   // ----------------------------------
   void switchLocations() {
-  setState(() {
-    print("Before Swap: Departure = ${departure?.name}, Arrival = ${arrival?.name}");
-    final temp = departure;
-    departure = arrival;
-    arrival = temp;
-    print("After Swap: Departure = ${departure?.name}, Arrival = ${arrival?.name}");
-  });
-}
+    setState(() {
+      print(
+          "Before Swap: Departure = ${departure?.name}, Arrival = ${arrival?.name}");
+      final temp = departure;
+      departure = arrival;
+      arrival = temp;
+      print(
+          "After Swap: Departure = ${departure?.name}, Arrival = ${arrival?.name}");
+    });
+  }
 
+  void selectLocation(bool isDeparture) async {
+    final selectedLocation = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LocationPicker(
+          previousLocation: isDeparture ? departure : arrival,
+          onLocationSelected: (location) {
+            setState(() {
+              if (isDeparture) {
+                departure = location;
+              } else {
+                arrival = location;
+              }
+            });
+          },
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,15 +118,14 @@ class _RidePrefFormState extends State<RidePrefForm> {
                 BlaButton(
                   icon: Icons.radio_button_off,
                   text: departure?.name ?? "Leaving from",
-                  onTap: () {},
+                  onTap: () => selectLocation(true),
                   onTrailingIconTap: switchLocations,
-                  location: departure, // Test case for location being inputted
                 ),
                 SizedBox(height: BlaSpacings.s),
                 BlaButton(
                   icon: Icons.radio_button_off,
                   text: arrival?.name ?? "Going to",
-                  onTap: () {},
+                  onTap: () => selectLocation(false),
                 ),
                 SizedBox(height: BlaSpacings.s),
                 BlaButton(
@@ -149,7 +166,3 @@ class _RidePrefFormState extends State<RidePrefForm> {
     );
   }
 }
-
-
-
-
