@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new_flutter/model/ride/locations.dart';
 import 'package:new_flutter/theme/theme.dart';
 
 class BlaButton extends StatelessWidget {
@@ -7,6 +8,8 @@ class BlaButton extends StatelessWidget {
   final VoidCallback onTap;
   final bool isPrimary;
   final IconData? trailingIcon;
+  final Location? location;
+  final VoidCallback? onTrailingIconTap;
 
   const BlaButton({
     super.key,
@@ -15,6 +18,7 @@ class BlaButton extends StatelessWidget {
     required this.onTap,
     this.isPrimary = false,
     this.trailingIcon,
+    this.location, this.onTrailingIconTap,
   });
 
   @override
@@ -37,7 +41,7 @@ class BlaButton extends StatelessWidget {
           children: [
             Row(
               children: [
-                if (icon != null) Icon(icon, color: isPrimary ? BlaColors.white : Colors.black54),
+                Icon(icon, color: isPrimary ? BlaColors.white : Colors.black54),
                 SizedBox(width: BlaSpacings.s),
                 Text(
                   text,
@@ -47,7 +51,9 @@ class BlaButton extends StatelessWidget {
                 ),
               ],
             ),
-            if (trailingIcon != null) Icon(trailingIcon),
+            if (location != null) IconButton(onPressed: onTrailingIconTap, icon: Icon(Icons.swap_vert, color: BlaColors.primary),),
+              if (trailingIcon != null)
+                Icon(Icons.arrow_forward_ios, size: 16, color: Colors.black54),
           ],
         ),
       ),

@@ -26,9 +26,9 @@ class RidePrefForm extends StatefulWidget {
 }
 
 class _RidePrefFormState extends State<RidePrefForm> {
-  Location? departure;
+  Location? departure = Location(name: "Paris", country: Country.france);
   late DateTime departureDate = DateTime.now();
-  Location? arrival;
+  Location? arrival = Location(name: "Lyon", country: Country.france);
   int requestedSeats = 1;
 
 
@@ -61,11 +61,19 @@ class _RidePrefFormState extends State<RidePrefForm> {
   // ----------------------------------
   // Build the widgets
   // ----------------------------------
+  void switchLocations() {
+  setState(() {
+    print("Before Swap: Departure = ${departure?.name}, Arrival = ${arrival?.name}");
+    final temp = departure;
+    departure = arrival;
+    arrival = temp;
+    print("After Swap: Departure = ${departure?.name}, Arrival = ${arrival?.name}");
+  });
+}
+
+
   @override
   Widget build(BuildContext context) {
-    DateTime departureDate = widget.initRidePref?.departureDate ?? DateTime.now();
-    int requestedSeats = widget.initRidePref?.requestedSeats ?? 1;
-
     return Container(
       padding: const EdgeInsets.all(BlaSpacings.m),
       child: Column(
@@ -90,14 +98,16 @@ class _RidePrefFormState extends State<RidePrefForm> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 BlaButton(
-                  icon: Icons.location_on,
-                  text: "Leaving from",
+                  icon: Icons.radio_button_off,
+                  text: departure?.name ?? "Leaving from",
                   onTap: () {},
+                  onTrailingIconTap: switchLocations,
+                  location: departure, // Test case for location being inputted
                 ),
                 SizedBox(height: BlaSpacings.s),
                 BlaButton(
-                  icon: Icons.flag,
-                  text: "Going to",
+                  icon: Icons.radio_button_off,
+                  text: arrival?.name ?? "Going to",
                   onTap: () {},
                 ),
                 SizedBox(height: BlaSpacings.s),
@@ -112,7 +122,9 @@ class _RidePrefFormState extends State<RidePrefForm> {
                       lastDate: DateTime(2101),
                     );
                     if (pickedDate != null) {
-                      departureDate = pickedDate;
+                      setState(() {
+                        departureDate = pickedDate;
+                      });
                     }
                   },
                 ),
