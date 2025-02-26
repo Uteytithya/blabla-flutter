@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:new_flutter/screens/global_widget/bla_button.dart';
 import 'package:new_flutter/screens/location/location_picker_screen.dart';
 import 'package:new_flutter/theme/theme.dart';
+import 'package:new_flutter/utils/animations_util.dart';
 
 import '../../../model/ride/locations.dart';
 import '../../../model/ride_pref/ride_pref.dart';
@@ -71,23 +72,15 @@ class _RidePrefFormState extends State<RidePrefForm> {
   }
 
   void selectLocation(bool isDeparture) async {
-    final selectedLocation = await Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => LocationPicker(
-          previousLocation: isDeparture ? departure : arrival,
-          onLocationSelected: (location) {
-            setState(() {
-              if (isDeparture) {
-                departure = location;
-              } else {
-                arrival = location;
-              }
-            });
-          },
-        ),
-      ),
-    );
+    final selectedLocation =
+        await Navigator.of(context).push(AnimationUtils.createBottomToTopRoute(LocationPicker(
+      onLocationSelected: (location) {
+        setState(() {
+          departure = location;
+        });
+      },
+      previousLocation: departure,
+    )));
   }
 
   @override
