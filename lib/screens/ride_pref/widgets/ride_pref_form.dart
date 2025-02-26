@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:new_flutter/screens/global_widget/primary_button.dart';
-import 'package:new_flutter/screens/global_widget/secondary_button.dart';
+import 'package:new_flutter/screens/global_widget/bla_button.dart';
 import 'package:new_flutter/theme/theme.dart';
  
 import '../../../model/ride/locations.dart';
@@ -90,13 +89,21 @@ class _RidePrefFormState extends State<RidePrefForm> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SecondaryButton(icon: Icons.location_on, text: "Leaving from", onTap: () {}),
+                BlaButton(
+                  icon: Icons.location_on,
+                  text: "Leaving from",
+                  onTap: () {},
+                ),
                 SizedBox(height: BlaSpacings.s),
-                SecondaryButton(icon: Icons.flag, text: "Going to", onTap: () {}),
+                BlaButton(
+                  icon: Icons.flag,
+                  text: "Going to",
+                  onTap: () {},
+                ),
                 SizedBox(height: BlaSpacings.s),
-                SecondaryButton(
+                BlaButton(
                   icon: Icons.calendar_today,
-                  text: departureDate == DateTime.now() ? 'Today' : DateFormat('EEE, d MMM').format(departureDate), // Format the date into format "Mon, 12 Jan"
+                  text: DateFormat('EEE, d MMM').format(departureDate),
                   onTap: () async {
                     DateTime? pickedDate = await showDatePicker(
                       context: context,
@@ -110,9 +117,18 @@ class _RidePrefFormState extends State<RidePrefForm> {
                   },
                 ),
                 SizedBox(height: BlaSpacings.s),
-                SecondaryButton(icon: Icons.person, text: "$requestedSeats Passenger(s)", onTap: () {}),
+                BlaButton(
+                  icon: Icons.person,
+                  text: "$requestedSeats Passenger(s)",
+                  onTap: () {},
+                ),
                 SizedBox(height: BlaSpacings.s),
-                PrimaryButton(),
+                BlaButton(
+                  icon: Icons.search,
+                  text: "Search",
+                  onTap: () {},
+                  isPrimary: true,
+                ),
               ],
             ),
           ),

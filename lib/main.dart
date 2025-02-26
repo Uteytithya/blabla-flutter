@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/ride_pref/ride_pref_screen.dart';
+import 'package:new_flutter/test/screen/test_button_screen.dart';
 import 'theme/theme.dart';
 
 void main() {
@@ -14,7 +14,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: appTheme,
-      home: Scaffold(body: RidePrefScreen()),
+      // home: Scaffold(body: RidePrefScreen()),
+      home: const TestScreen(),
     );
   }
 }
