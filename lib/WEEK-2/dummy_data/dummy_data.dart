@@ -1,5 +1,8 @@
+import 'package:new_flutter/WEEK-2/model/ride/ride.dart';
+import 'package:new_flutter/WEEK-2/service/rides_service.dart';
+
 import '../model/ride/locations.dart';
-import '../model/ride/ride.dart';
+
 import '../model/ride_pref/ride_pref.dart';
 import '../model/user/user.dart';
 import 'dart:math';
@@ -53,6 +56,16 @@ const List<Location> fakeLocations = [
   Location(name: "Dijon", country: Country.france),
   Location(name: "Le Havre", country: Country.france),
   Location(name: "Brest", country: Country.france),
+];
+
+// Fake Cambodia Locations
+
+List<Location> fakeCambodiaLocations = [
+  Location(name: "Phnom Penh", country: Country.cambodia),
+  Location(name: "Siem Reap", country: Country.cambodia),
+  Location(name: "Battambang", country: Country.cambodia),
+  Location(name: "Sihanoukville", country: Country.cambodia),
+  Location(name: "Kampot", country: Country.cambodia),
 ];
 
 // Fake Ride Preferences
@@ -146,6 +159,66 @@ List<User> fakeUsers = [
     verifiedProfile: true,
   ),
 ];
+DateTime now = DateTime.now();
+
+// Battambang to Siem reap rides
+List<Ride> fakeCambodiaRides = [
+  Ride(
+      departureLocation: fakeCambodiaLocations[2], // Battambang
+      departureDate:
+          DateTime(now.year, now.month, now.day, 5, 30, 0), 
+      arrivalLocation: fakeCambodiaLocations[1], // Siem Reap
+      arrivalDateTime:
+          DateTime(now.year, now.month, now.day, 7, 30, 0),  
+      driver: fakeUsers[0], 
+      availableSeats: 2,
+      pricePerSeat: (random.nextDouble() * 20 + 5).roundToDouble(),
+      filter: RidesFilter(acceptPets: false)),
+  Ride(
+      departureLocation: fakeCambodiaLocations[2], // Battambang
+      departureDate:
+          DateTime(now.year, now.month, now.day, 20, 0, 0), 
+      arrivalLocation: fakeCambodiaLocations[1], // Siem Reap
+      arrivalDateTime:
+          DateTime(now.year, now.month, now.day, 22, 0, 0),  
+      driver: fakeUsers[1], 
+      availableSeats: 0,
+      pricePerSeat: (random.nextDouble() * 20 + 5).roundToDouble(),
+      filter: RidesFilter(acceptPets: false)),
+  Ride(
+      departureLocation: fakeCambodiaLocations[2], // Battambang
+      departureDate:
+          DateTime(now.year, now.month, now.day, 5, 0, 0), 
+      arrivalLocation: fakeCambodiaLocations[1], // Siem Reap
+      arrivalDateTime:
+          DateTime(now.year, now.month, now.day, 7, 0, 0),  
+      driver: fakeUsers[2], 
+      availableSeats: 1,
+      pricePerSeat: (random.nextDouble() * 20 + 5).roundToDouble(),
+      filter: RidesFilter(acceptPets: false)),
+  Ride(
+      departureLocation: fakeCambodiaLocations[2], // Battambang
+      departureDate:
+          DateTime(now.year, now.month, now.day, 20, 0, 0), 
+      arrivalLocation: fakeCambodiaLocations[1], // Siem Reap
+      arrivalDateTime:
+          DateTime(now.year, now.month, now.day, 22, 0, 0),  
+      driver: fakeUsers[3], 
+      availableSeats: 2,
+      pricePerSeat: (random.nextDouble() * 20 + 5).roundToDouble(),
+      filter: RidesFilter(acceptPets: true)),
+  Ride(
+      departureLocation: fakeCambodiaLocations[2], // Battambang
+      departureDate:
+          DateTime(now.year, now.month, now.day, 5, 0, 0), 
+      arrivalLocation: fakeCambodiaLocations[1], // Siem Reap
+      arrivalDateTime:
+          DateTime(now.year, now.month, now.day, 7, 0, 0),  
+      driver: fakeUsers[4], 
+      availableSeats: 1,
+      pricePerSeat: (random.nextDouble() * 20 + 5).roundToDouble(),
+      filter: RidesFilter(acceptPets: false)),
+];
 
 // Fake  Rides
 
@@ -177,6 +250,7 @@ List<Ride> fakeRides = List.generate(50, (index) {
     arrivalDateTime: arrivalTime,
     driver: driver,
     availableSeats: availableSeats,
-    pricePerSeat: pricePerSeat,
+    pricePerSeat: pricePerSeat, 
+    filter: RidesFilter(acceptPets: false),
   );
 });

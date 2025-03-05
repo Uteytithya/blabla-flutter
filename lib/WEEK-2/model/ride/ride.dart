@@ -1,4 +1,5 @@
 import 'package:new_flutter/WEEK-2/model/ride/locations.dart';
+import 'package:new_flutter/WEEK-2/service/rides_service.dart';
 import '../../utils/date_time_util.dart';
 import '../user/user.dart';
 
@@ -26,6 +27,8 @@ class Ride {
 
   RideStatus status = RideStatus.created;
 
+  RidesFilter filter;
+
   final List<User> passengers = [];
 
   Ride({
@@ -36,6 +39,7 @@ class Ride {
     required this.driver,
     required this.availableSeats,
     required this.pricePerSeat,
+    required this.filter,
   });
 
   void addPassenger(User passenger) {
