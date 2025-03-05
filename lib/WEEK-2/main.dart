@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:new_flutter/WEEK-2/repository/mock/mock_locations_repository.dart';
+import 'package:new_flutter/WEEK-2/service/locations_service.dart';
+import 'package:new_flutter/WEEK-2/repository/mock/mock_ride_preferences_repository.dart';
+
 import 'screens/ride_pref/ride_pref_screen.dart';
+import 'service/ride_prefs_service.dart';
 import 'theme/theme.dart';
 
 void main() {
+
+  // 1 - Initialize the services
+  RidePrefService.initialize(MockRidePreferencesRepository());
+
+  // 2. Initialize the locations service
+  LocationsService.initialize(MockLocationsRepository());
+
+  print(LocationsService.instance.getLocations());
+
+  // 3- Run the UI
   runApp(const MyApp());
 }
 

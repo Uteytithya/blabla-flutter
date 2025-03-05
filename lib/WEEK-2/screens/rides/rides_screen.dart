@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:week_3_blabla_project/screens/rides/widgets/ride_pref_bar.dart';
-
+import 'package:new_flutter/WEEK-2/screens/rides/widgets/ride_pref_bar.dart';
+ 
+import '../../dummy_data/dummy_data.dart';
 import '../../model/ride/ride.dart';
 import '../../model/ride_pref/ride_pref.dart';
 import '../../service/rides_service.dart';
 import '../../theme/theme.dart';
+ 
 import 'widgets/rides_tile.dart';
 
 ///
@@ -12,28 +14,31 @@ import 'widgets/rides_tile.dart';
 ///  The screen also allow user to re-define the ride preferences and to activate some filters.
 ///
 class RidesScreen extends StatefulWidget {
-  final RidePref initialRidePref;
-
-  const RidesScreen({super.key, required this.initialRidePref});
+  const RidesScreen({super.key});
 
   @override
   State<RidesScreen> createState() => _RidesScreenState();
 }
 
 class _RidesScreenState extends State<RidesScreen> {
-  List<Ride> get matchingRides =>
-      RidesService.getRidesFor(widget.initialRidePref);
-
-  void onRidePrefPressed() {
  
-    // 1- open a modal to edit the ride preferences
+  RidePreference currentPreference  = fakeRidePrefs[0];   // TODO 1 :  We should get it from the service
 
+  List<Ride> get matchingRides => RidesService.getRidesFor(currentPreference);
+
+  void onBackPressed() {
+    Navigator.of(context).pop();     //  Back to the previous view
+  } 
+
+  void onPreferencePressed() async {
+        // TODO  6 : we should push the modal with the current pref
+
+        // TODO 9 :  After pop, we should get the new current pref from the modal 
+
+        // TODO 10 :  Then we should update the service current pref,   and update the view
   }
 
- 
-
   void onFilterPressed() {
-    print("onFilterPressed");
   }
 
   @override
@@ -46,8 +51,9 @@ class _RidesScreenState extends State<RidesScreen> {
         children: [
           // Top search Search bar
           RidePrefBar(
-              ridePref: widget.initialRidePref,
-              onRidePrefPressed: onRidePrefPressed,
+              ridePreference: currentPreference,
+              onBackPressed: onBackPressed,
+              onPreferencePressed: onPreferencePressed,
               onFilterPressed: onFilterPressed),
 
           Expanded(
