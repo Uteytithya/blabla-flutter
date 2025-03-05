@@ -15,8 +15,8 @@ class RidesService {
 
   RidesService._internal(this.repository) {}
 
-  List<Ride> getRides(RidePreference preferences, RidesFilter? filter) {
-    return repository.getRides(preferences, filter);
+  List<Ride> getRides(RidePreference preferences, RidesFilter? filter, RideSortType? sortType) {
+    return repository.getRides(preferences, filter, sortType);
   }
 
   static RidesService get instance {
@@ -37,4 +37,26 @@ class RidesFilter {
   RidesFilter({
     required this.acceptPets
   });
+}
+
+class RideSortType {
+  final String key;
+  final String label;
+
+  const RideSortType._(this.key, this.label);
+
+  static const RideSortType earliestDeparture = 
+      RideSortType._("earliestDeparture", "Earliest departure");
+  static const RideSortType lowestPrice = 
+      RideSortType._("lowestPrice", "Lowest price");
+  static const RideSortType shortestRide = 
+      RideSortType._("shortestRide", "Shortest ride");
+
+  static const List<RideSortType> values = [
+    earliestDeparture,
+    lowestPrice,
+  ];
+
+  @override
+  String toString() => label;
 }
