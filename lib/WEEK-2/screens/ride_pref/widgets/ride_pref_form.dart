@@ -93,23 +93,25 @@ class _RidePrefFormState extends State<RidePrefForm> {
   }
 
   void onSubmit() {
-    // 1- Check input validity
-    bool hasDeparture = departure != null;
-    bool hasArrival = arrival != null;
-    bool isValid = hasDeparture && hasArrival;
+  // 1 - Check input validity
+  bool hasDeparture = departure != null;
+  bool hasArrival = arrival != null;
+  bool isValid = hasDeparture && hasArrival;
 
-    if (isValid) {
-      // 2 - Create a  new preference
-      RidePreference newPreference = RidePreference(
-          departure: departure!,
-          departureDate: departureDate,
-          arrival: arrival!,
-          requestedSeats: requestedSeats);
+  if (isValid) {
+    // 2 - Create a new preference
+    RidePreference newPreference = RidePreference(
+      departure: departure!,
+      departureDate: departureDate,
+      arrival: arrival!,
+      requestedSeats: requestedSeats,
+    );
 
-      // 3 - Callback withg the new preference
-      widget.onSubmit(newPreference);
-    }
+    // 3 - Callback with the new preference
+    widget.onSubmit(newPreference);
   }
+}
+
 
   void onSwappingLocationPressed() {
     setState(() {

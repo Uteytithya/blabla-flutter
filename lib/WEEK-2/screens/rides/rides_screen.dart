@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:new_flutter/WEEK-2/service/ride_prefs_service.dart';
 import 'package:new_flutter/WEEK-2/screens/rides/widgets/ride_pref_bar.dart';
- 
+import 'package:new_flutter/WEEK-2/screens/rides/widgets/ride_pref_modal.dart';
+
 import '../../dummy_data/dummy_data.dart';
 import '../../model/ride/ride.dart';
 import '../../model/ride_pref/ride_pref.dart';
 import '../../service/rides_service.dart';
 import '../../theme/theme.dart';
- 
+
 import 'widgets/rides_tile.dart';
 
 ///
@@ -21,25 +23,45 @@ class RidesScreen extends StatefulWidget {
 }
 
 class _RidesScreenState extends State<RidesScreen> {
- 
-  RidePreference currentPreference  = fakeRidePrefs[0];   // TODO 1 :  We should get it from the service
+  RidePreference? currentPreference = RidePrefService.instance.currentPreference; // TODO 1 :  We should get it from the service
 
-  List<Ride> get matchingRides => RidesService.instance.getRides(currentPreference, null);
+  List<Ride> get matchingRides =>
+      RidesService.instance.getRides(currentPreference!, null, null);
 
   void onBackPressed() {
-    Navigator.of(context).pop();     //  Back to the previous view
-  } 
+    Navigator.of(context).pop(); //  Back to the previous view
+  }
 
   void onPreferencePressed() async {
-        // TODO  6 : we should push the modal with the current pref
+    // TODO  6 : we should push the modal with the current pref
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) =>
+            RidePrefModal(currentPreference: currentPreference!),
+      ),
+    );
 
-        // TODO 9 :  After pop, we should get the new current pref from the modal 
+    // TODO 9 :  After pop, we should get the new current pref from the modal
 
-        // TODO 10 :  Then we should update the service current pref,   and update the view
+    final updatedPrefs = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => RidePrefModal(currentPreference: currentPreference!),
+      ),
+    );
+
+    if (updatedPrefs != null) {
+      setState(() {
+        currentPreference = updatedPrefs; // Update state
+      });
+    }
+
+    // TODO 10 :  Then we should update the service current pref,   and update the view
+    RidePrefService.instance.setCurrentPreference(updatedPrefs);
   }
 
-  void onFilterPressed() {
-  }
+  void onFilterPressed() {}
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +73,7 @@ class _RidesScreenState extends State<RidesScreen> {
         children: [
           // Top search Search bar
           RidePrefBar(
-              ridePreference: currentPreference,
+              ridePreference: currentPreference!,
               onBackPressed: onBackPressed,
               onPreferencePressed: onPreferencePressed,
               onFilterPressed: onFilterPressed),

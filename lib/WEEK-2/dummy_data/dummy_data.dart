@@ -2,7 +2,6 @@ import 'package:new_flutter/WEEK-2/model/ride/ride.dart';
 import 'package:new_flutter/WEEK-2/service/rides_service.dart';
 
 import '../model/ride/locations.dart';
-
 import '../model/ride_pref/ride_pref.dart';
 import '../model/user/user.dart';
 import 'dart:math';
