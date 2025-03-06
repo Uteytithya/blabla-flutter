@@ -46,6 +46,8 @@ class Ride {
     passengers.add(passenger);
   }
 
+  int get duration => arrivalDateTime.difference(departureDate).inHours;
+
   int get remainingSeats => availableSeats - passengers.length;
 
   @override

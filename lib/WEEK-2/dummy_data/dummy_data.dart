@@ -159,6 +159,52 @@ List<User> fakeUsers = [
     verifiedProfile: true,
   ),
 ];
+
+// Fake Cambodia User
+
+List<User> fakeCambodiaUsers = [
+  User(
+    firstName: "Kannika",
+    lastName: "Durand",
+    email: "fanny.durand@example.com",
+    phone: "+33 675839201",
+    profilePicture: "https://randomuser.me/api/portraits/women/6.jpg",
+    verifiedProfile: true,
+  ),
+  User(
+    firstName: "Chaylim",
+    lastName: "Durand",
+    email: "fanny.durand@example.com",
+    phone: "+33 675839201",
+    profilePicture: "https://randomuser.me/api/portraits/women/6.jpg",
+    verifiedProfile: true,
+  ),
+  User(
+    firstName: "Mengtech",
+    lastName: "Durand",
+    email: "fanny.durand@example.com",
+    phone: "+33 675839201",
+    profilePicture: "https://randomuser.me/api/portraits/women/6.jpg",
+    verifiedProfile: true,
+  ),
+  User(
+    firstName: "Limhao",
+    lastName: "Durand",
+    email: "fanny.durand@example.com",
+    phone: "+33 675839201",
+    profilePicture: "https://randomuser.me/api/portraits/women/6.jpg",
+    verifiedProfile: true,
+  ),
+  User(
+    firstName: "Sovanda",
+    lastName: "Durand",
+    email: "fanny.durand@example.com",
+    phone: "+33 675839201",
+    profilePicture: "https://randomuser.me/api/portraits/women/6.jpg",
+    verifiedProfile: true,
+  ),
+];
+
 DateTime now = DateTime.now();
 
 // Battambang to Siem reap rides
@@ -166,55 +212,55 @@ List<Ride> fakeCambodiaRides = [
   Ride(
       departureLocation: fakeCambodiaLocations[2], // Battambang
       departureDate:
-          DateTime(now.year, now.month, now.day, 5, 30, 0), 
+          DateTime.now().add(Duration(hours: 5, minutes: 30)),
       arrivalLocation: fakeCambodiaLocations[1], // Siem Reap
       arrivalDateTime:
-          DateTime(now.year, now.month, now.day, 7, 30, 0),  
-      driver: fakeUsers[0], 
+          DateTime.now().add(Duration(hours: 7, minutes: 30)),  
+      driver: fakeCambodiaUsers[0], 
       availableSeats: 2,
       pricePerSeat: (random.nextDouble() * 20 + 5).roundToDouble(),
       filter: RidesFilter(acceptPets: false)),
   Ride(
       departureLocation: fakeCambodiaLocations[2], // Battambang
       departureDate:
-          DateTime(now.year, now.month, now.day, 20, 0, 0), 
+          DateTime.now().add(Duration(hours: 20)), 
       arrivalLocation: fakeCambodiaLocations[1], // Siem Reap
       arrivalDateTime:
-          DateTime(now.year, now.month, now.day, 22, 0, 0),  
-      driver: fakeUsers[1], 
+          DateTime.now().add(Duration(hours: 22)),  
+      driver: fakeCambodiaUsers[1], 
       availableSeats: 0,
       pricePerSeat: (random.nextDouble() * 20 + 5).roundToDouble(),
       filter: RidesFilter(acceptPets: false)),
   Ride(
       departureLocation: fakeCambodiaLocations[2], // Battambang
       departureDate:
-          DateTime(now.year, now.month, now.day, 5, 0, 0), 
+          DateTime.now().add(Duration(hours: 5)), 
       arrivalLocation: fakeCambodiaLocations[1], // Siem Reap
       arrivalDateTime:
-          DateTime(now.year, now.month, now.day, 7, 0, 0),  
-      driver: fakeUsers[2], 
+          DateTime.now().add(Duration(hours: 7)),  
+      driver: fakeCambodiaUsers[2], 
       availableSeats: 1,
       pricePerSeat: (random.nextDouble() * 20 + 5).roundToDouble(),
       filter: RidesFilter(acceptPets: false)),
   Ride(
       departureLocation: fakeCambodiaLocations[2], // Battambang
       departureDate:
-          DateTime(now.year, now.month, now.day, 20, 0, 0), 
+          DateTime.now().add(Duration(hours: 20)), 
       arrivalLocation: fakeCambodiaLocations[1], // Siem Reap
       arrivalDateTime:
-          DateTime(now.year, now.month, now.day, 22, 0, 0),  
-      driver: fakeUsers[3], 
+          DateTime.now().add(Duration(hours: 22)),  
+      driver: fakeCambodiaUsers[3], 
       availableSeats: 2,
       pricePerSeat: (random.nextDouble() * 20 + 5).roundToDouble(),
       filter: RidesFilter(acceptPets: true)),
   Ride(
       departureLocation: fakeCambodiaLocations[2], // Battambang
       departureDate:
-          DateTime(now.year, now.month, now.day, 5, 0, 0), 
+          DateTime.now().add(Duration(hours: 5)), 
       arrivalLocation: fakeCambodiaLocations[1], // Siem Reap
       arrivalDateTime:
-          DateTime(now.year, now.month, now.day, 7, 0, 0),  
-      driver: fakeUsers[4], 
+          DateTime.now().add(Duration(hours: 7)),  
+      driver: fakeCambodiaUsers[4], 
       availableSeats: 1,
       pricePerSeat: (random.nextDouble() * 20 + 5).roundToDouble(),
       filter: RidesFilter(acceptPets: false)),

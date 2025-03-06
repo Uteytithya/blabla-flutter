@@ -14,8 +14,9 @@ class MockRidesRepository extends RidesRepository {
     for (var ride in fakeCambodiaRides) {
       if (ride.departureLocation == preferences.departure &&
           ride.arrivalLocation == preferences.arrival &&
-          ride.departureDate.isAfter(preferences.departureDate) &&
-          ride.remainingSeats > 0) {
+          (ride.departureDate.isAtSameMomentAs(preferences.departureDate) ||
+              ride.departureDate.isAfter(preferences.departureDate)) &&
+          ride.availableSeats >= preferences.requestedSeats) {
         // Apply Filter
         if (filter == null || filter.acceptPets == ride.filter.acceptPets) {
           result.add(ride);
